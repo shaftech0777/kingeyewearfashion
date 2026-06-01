@@ -22,7 +22,7 @@ export const Route = createFileRoute("/category/$slug")({
 });
 
 function CategoryPage() {
-  const { category, products } = Route.useLoaderData() as ReturnType<typeof Route.options.loader>;
+  const { category, products } = Route.useLoaderData() as { category: typeof categories[number]; products: ReturnType<typeof getByCategory> };
   return (
     <div className="container mx-auto px-4 py-12">
       <p className="text-xs uppercase tracking-[0.2em] text-[var(--gold)] mb-2">Collection</p>
