@@ -32,7 +32,7 @@ function Checkout() {
       shipping_address: String(fd.get("address")),
       city: String(fd.get("city")),
       postal_code: String(fd.get("postal")),
-      items: items as unknown as Record<string, unknown>,
+      items: items as unknown as never,
       total: grand,
     };
     const { data, error } = await supabase.from("orders").insert(payload).select("tracking_id").single();
