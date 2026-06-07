@@ -5,7 +5,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Us — King Eyewear Fashion" },
-      { name: "description", content: "Learn about King Eyewear Fashion, founded in 2015 by Rajveer Singh in Faisalabad, Punjab, Pakistan." },
+      { name: "description", content: "Learn about King Eyewear Fashion, founded by Mahad Ali in Faisalabad, Punjab, Pakistan." },
     ],
   }),
   component: About,
