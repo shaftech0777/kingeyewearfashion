@@ -83,7 +83,7 @@ function ProductPage() {
           </div>
 
           <ul className="mt-8 space-y-2 text-sm">
-            <li className="flex items-center gap-2"><Truck className="h-4 w-4 text-[var(--gold)]" /> Free delivery above ₹2,000</li>
+            <li className="flex items-center gap-2"><Truck className="h-4 w-4 text-[var(--gold)]" /> Free delivery above PKR 2,000</li>
             <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--gold)]" /> 1-year warranty</li>
             <li className="flex items-center gap-2"><Check className="h-4 w-4 text-[var(--gold)]" /> 7-day easy return</li>
           </ul>

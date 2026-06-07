@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <Crown className="h-5 w-5 text-[var(--gold)]" />
-            <span className="font-display text-lg font-bold">King Eyewear</span>
+            <span className="font-display text-lg font-bold">King Eyewear Fashion</span>
           </div>
           <p className="text-sm opacity-80">Crown your style. Premium eyewear crafted for kings & queens since 2015.</p>
         </div>
@@ -33,9 +33,9 @@ export function SiteFooter() {
         <div>
           <h4 className="font-semibold mb-3 text-sm">Contact</h4>
           <ul className="space-y-2 text-sm opacity-80">
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +91 98765 43210</li>
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> care@kingeyewear.in</li>
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Mumbai, India</li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> 03051544177</li>
+            <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> Kingeyewearfashion@gmail.com</li>
+            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Faisalabad, Punjab, Pakistan</li>
           </ul>
         </div>
       </div>

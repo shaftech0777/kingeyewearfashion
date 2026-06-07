@@ -32,7 +32,7 @@ export function Chatbot() {
       const reply = await askKingBot({ data: { messages: next } });
       setMsgs([...next, { role: "assistant", content: reply.text }]);
     } catch (e) {
-      setMsgs([...next, { role: "assistant", content: "Sorry, I'm having trouble right now. Please reach us at care@kingeyewear.in or +91 98765 43210." }]);
+      setMsgs([...next, { role: "assistant", content: "Sorry, I'm having trouble right now. Please reach us at Kingeyewearfashion@gmail.com or 03051544177." }]);
     } finally {
       setBusy(false);
     }
