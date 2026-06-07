@@ -55,7 +55,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "King Eyewear Fashion — Premium Sunglasses, Eyeglasses & Lenses" },
-      { name: "description", content: "Shop premium men's & women's sunglasses, prescription eyeglasses, contact lenses, and kids eyewear. Free delivery above ₹2000." },
+      { name: "description", content: "Shop premium men's & women's sunglasses, prescription eyeglasses, contact lenses, and kids eyewear. Free delivery above PKR 2,000." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

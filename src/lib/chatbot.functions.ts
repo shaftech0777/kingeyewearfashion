@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const SYSTEM = `You are the King Eyewear Fashion assistant — a polite, knowledgeable customer-care concierge for the brand "King Eyewear Fashion", a premium Indian eyewear e-commerce store.
+const SYSTEM = `You are the King Eyewear Fashion assistant — a polite, knowledgeable customer-care concierge for the brand "King Eyewear Fashion", a premium Pakistani eyewear e-commerce store.
 
 ABOUT THE BRAND:
 - Founded in 2015 by Mr. Rajveer Singh in Faisalabad, Punjab, Pakistan.
@@ -32,7 +32,7 @@ OWNER & CONTACT:
 - Owner / Founder: Rajveer Singh.
 - Email: Kingeyewearfashion@gmail.com · Phone: 03051544177 · HQ: Faisalabad, Punjab, Pakistan.
 
-Keep responses concise, friendly, and helpful. If you don't know something, suggest they contact care@kingeyewear.in.`;
+Keep responses concise, friendly, and helpful. If you don't know something, suggest they contact Kingeyewearfashion@gmail.com.`;
 
 export const askKingBot = createServerFn({ method: "POST" })
   .inputValidator((d: { messages: Msg[] }) => d)
