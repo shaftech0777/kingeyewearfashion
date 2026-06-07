@@ -3,9 +3,12 @@ import { useCart } from "@/lib/cart";
 import { formatPrice } from "@/data/products";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import { toast } from "sonner";
 
-async function createOrder(payload: Record<string, unknown>) {
+type OrderInsert = Database["public"]["Tables"]["orders"]["Insert"];
+
+async function createOrder(payload: OrderInsert) {
   const request = () => supabase.from("orders").insert(payload).select("tracking_id").single();
   let result = await request();
   const message = result.error?.message ?? "";
@@ -43,7 +46,7 @@ function Checkout() {
       shipping_address: String(fd.get("address")),
       city: String(fd.get("city")),
       postal_code: String(fd.get("postal")),
-      items: items as unknown as never,
+      items: items as unknown as OrderInsert["items"],
       total: grand,
     };
     const { data, error } = await createOrder(payload);
