@@ -50,10 +50,11 @@ function About() {
         <li>• Free standard delivery across Pakistan on orders above PKR 2,000.</li>
       </ul>
 
-      <h2 className="font-display text-2xl font-bold mt-12 mb-4">Owner</h2>
+      <h2 className="font-display text-2xl font-bold mt-12 mb-4">Our Team</h2>
       <div className="rounded-lg border p-6 bg-muted/30">
-        <p className="font-semibold text-lg">Rajveer Singh</p>
-        <p className="text-sm text-muted-foreground">Founder & CEO, King Eyewear Fashion</p>
+        <p className="font-semibold text-lg">Mahad Ali</p>
+        <p className="text-sm text-muted-foreground">Owner, King Eyewear Fashion</p>
+        <p className="mt-1 text-sm text-muted-foreground">CEO: Naveed Ali</p>
         <p className="mt-3 text-sm italic">"Eyewear is the only accessory people look through — and the first thing the world sees on you. That's why we obsess over every detail."</p>
       </div>
     </div>
