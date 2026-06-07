@@ -5,6 +5,17 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+async function createOrder(payload: Record<string, unknown>) {
+  const request = () => supabase.from("orders").insert(payload).select("tracking_id").single();
+  let result = await request();
+  const message = result.error?.message ?? "";
+  if (message.toLowerCase().includes("schema cache")) {
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    result = await request();
+  }
+  return result;
+}
+
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [{ title: "Checkout — King Eyewear" }] }),
   component: Checkout,
@@ -35,9 +46,9 @@ function Checkout() {
       items: items as unknown as never,
       total: grand,
     };
-    const { data, error } = await supabase.from("orders").insert(payload).select("tracking_id").single();
+    const { data, error } = await createOrder(payload);
     setBusy(false);
-    if (error || !data) { toast.error("Order failed: " + (error?.message ?? "")); return; }
+    if (error || !data) { toast.error("Order failed. Please try again or WhatsApp us."); return; }
 
     // Send email notification to owner via FormSubmit (no signup; first submit requires owner email confirmation)
     try {
