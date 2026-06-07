@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -55,8 +54,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "King Eyewear Fashion — Premium Sunglasses, Eyeglasses & Lenses" },
-      { name: "description", content: "Shop premium men's & women's sunglasses, prescription eyeglasses, contact lenses, and kids eyewear. Free delivery above PKR 2,000." },
+      { title: "King Eyewear Fashion — Premium Sunglasses" },
+      { name: "description", content: "Shop premium Men's Cheetah Magic Glasses Free delivery all over the Pakistan. PKR: 1650/" },
+      { property: "og:title", content: "King Eyewear Fashion — Premium Sunglasses" },
+      { name: "twitter:title", content: "King Eyewear Fashion — Premium Sunglasses" },
+      { property: "og:description", content: "Shop premium Men's Cheetah Magic Glasses Free delivery all over the Pakistan. PKR: 1650/" },
+      { name: "twitter:description", content: "Shop premium Men's Cheetah Magic Glasses Free delivery all over the Pakistan. PKR: 1650/" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5f3637d4-9966-46e5-9637-9533d20dae67" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5f3637d4-9966-46e5-9637-9533d20dae67" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -89,7 +96,6 @@ function RootComponent() {
         <main className="flex-1"><Outlet /></main>
         <SiteFooter />
         <Chatbot />
-        <WhatsAppButton />
         <Toaster position="top-center" richColors />
       </div>
     </QueryClientProvider>
