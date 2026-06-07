@@ -7,8 +7,8 @@ type Msg = { role: "user" | "assistant"; content: string };
 const SUGGESTIONS = [
   "What's the delivery time?",
   "How do I track my order?",
-  "Tell me about King Eyewear",
-  "Do you offer prescription lenses?",
+  "Tell me about this product",
+  "Can I open & check before paying?",
 ];
 
 export function Chatbot() {
@@ -16,7 +16,7 @@ export function Chatbot() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
-    { role: "assistant", content: "👑 Welcome to King Eyewear! I'm your style assistant. Ask me about delivery, orders, products, or the brand." },
+    { role: "assistant", content: "👑 Welcome to King Eyewear! I'm your style assistant. Ask me about the King Cartier Rimless Eyewear, delivery, order tracking, or payment." },
   ]);
   const endRef = useRef<HTMLDivElement>(null);
 
