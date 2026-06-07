@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -95,6 +96,7 @@ function RootComponent() {
         <SiteHeader />
         <main className="flex-1"><Outlet /></main>
         <SiteFooter />
+        <WhatsAppButton />
         <Chatbot />
         <Toaster position="top-center" richColors />
       </div>

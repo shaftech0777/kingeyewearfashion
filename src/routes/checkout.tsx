@@ -1,9 +1,23 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
 import { formatPrice } from "@/data/products";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import { toast } from "sonner";
+
+type OrderInsert = Database["public"]["Tables"]["orders"]["Insert"];
+
+async function createOrder(payload: OrderInsert) {
+  const request = () => supabase.from("orders").insert(payload).select("tracking_id").single();
+  let result = await request();
+  const message = result.error?.message ?? "";
+  if (message.toLowerCase().includes("schema cache")) {
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    result = await request();
+  }
+  return result;
+}
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [{ title: "Checkout — King Eyewear" }] }),
@@ -14,6 +28,7 @@ function Checkout() {
   const { items, total, clear } = useCart();
   const nav = useNavigate();
   const [busy, setBusy] = useState(false);
+  const submittingRef = useRef(false);
   const shipping = 0;
   const grand = total + shipping;
 
@@ -23,6 +38,8 @@ function Checkout() {
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setBusy(true);
     const fd = new FormData(e.currentTarget);
     const payload = {
@@ -32,12 +49,16 @@ function Checkout() {
       shipping_address: String(fd.get("address")),
       city: String(fd.get("city")),
       postal_code: String(fd.get("postal")),
-      items: items as unknown as never,
+      items: items as unknown as OrderInsert["items"],
       total: grand,
     };
-    const { data, error } = await supabase.from("orders").insert(payload).select("tracking_id").single();
+    const { data, error } = await createOrder(payload);
     setBusy(false);
-    if (error || !data) { toast.error("Order failed: " + (error?.message ?? "")); return; }
+    if (error || !data) {
+      submittingRef.current = false;
+      toast.error("Order failed. Please try again or WhatsApp us.");
+      return;
+    }
 
     // Send email notification to owner via FormSubmit (no signup; first submit requires owner email confirmation)
     try {
@@ -63,6 +84,7 @@ function Checkout() {
     }
 
     clear();
+    submittingRef.current = false;
     toast.success(`Order placed! Tracking ID: ${data.tracking_id}`);
     nav({ to: "/track", search: { id: data.tracking_id } });
   }
