@@ -29,7 +29,7 @@ function About() {
 
       <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
         {[
-          { icon: Crown, n: "9+", l: "Years" },
+          { icon: Crown, n: "20+", l: "Years Experience" },
           { icon: Users, n: "100K+", l: "Customers" },
           { icon: Award, n: "500+", l: "Designs" },
           { icon: Globe, n: "Pan-Pakistan", l: "Delivery" },
