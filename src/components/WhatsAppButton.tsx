@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 
-const PHONE = "923051574241"; // intl format without + (PK)
+const PHONE = "923051544177"; // intl format without + (PK)
 const MESSAGE = "Assalam o Alaikum! I'm interested in King Eyewear Fashion.";
 
 export function WhatsAppButton() {
