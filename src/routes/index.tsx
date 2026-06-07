@@ -125,7 +125,7 @@ function ProductPage() {
             <div className="mt-8 grid grid-cols-3 gap-3 border-t pt-6">
               <Feature icon={Truck} title="Free Delivery" desc="Pan-Pakistan" />
               <Feature icon={Award} title="Premium Quality" desc="Luxury craft" />
-              <Feature icon={Crown} title="Cash on Delivery" desc="Pay on receive" />
+              <Feature icon={Crown} title="Open & Check" desc="Pay after check" />
             </div>
           </div>
         </div>

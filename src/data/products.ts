@@ -13,13 +13,14 @@ export const product = {
   price: 1650,
   images: productImages,
   description:
-    "Luxury rimless eyewear featuring a 24K gold-tone metal bridge with signature panther temple detail and premium rosewood arms. Photochromic lenses — clear indoors, tinted in sunlight. Made-in-Italy inspired craftsmanship.",
+    "Luxury rimless eyewear featuring a 24K gold-tone metal bridge with signature panther temple detail and premium rosewood arms. Photochromic lenses — clear indoors, tinted in sunlight. Made-in-Italy inspired craftsmanship. Also known as Cheeta Magic Glasses.",
   highlights: [
     "Rimless square aviator silhouette",
     "Gold-tone metal with rosewood temples",
     "Photochromic lenses (clear → tinted in sunlight)",
     "Lightweight & comfortable all-day fit",
     "Includes premium case & cleaning cloth",
+    "Allow to open — check before you pay",
   ],
 };
 
