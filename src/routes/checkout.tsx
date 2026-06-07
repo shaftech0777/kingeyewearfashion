@@ -38,6 +38,30 @@ function Checkout() {
     const { data, error } = await supabase.from("orders").insert(payload).select("tracking_id").single();
     setBusy(false);
     if (error || !data) { toast.error("Order failed: " + (error?.message ?? "")); return; }
+
+    // Send email notification to owner via FormSubmit (no signup; first submit requires owner email confirmation)
+    try {
+      const itemsText = items.map((i) => `• ${i.name} × ${i.qty} — ${formatPrice(i.price * i.qty)}`).join("\n");
+      await fetch("https://formsubmit.co/ajax/Kingeyewearfashion@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New Order ${data.tracking_id} — ${payload.customer_name}`,
+          _template: "table",
+          tracking_id: data.tracking_id,
+          customer_name: payload.customer_name,
+          customer_email: payload.customer_email,
+          customer_phone: payload.customer_phone,
+          shipping_address: `${payload.shipping_address}, ${payload.city} ${payload.postal_code}`,
+          items: itemsText,
+          total: formatPrice(grand),
+          message: `New order placed by ${payload.customer_name}. Please process and dispatch.`,
+        }),
+      });
+    } catch (e) {
+      console.error("Email notify failed", e);
+    }
+
     clear();
     toast.success(`Order placed! Tracking ID: ${data.tracking_id}`);
     nav({ to: "/track", search: { id: data.tracking_id } });
