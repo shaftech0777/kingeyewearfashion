@@ -1,9 +1,17 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { product, productImages, formatPrice } from "@/data/products";
 import { useCart } from "@/lib/cart";
-import { ShoppingBag, Truck, Check, Star, Crown, Sparkles, Award } from "lucide-react";
+import { Truck, Check, Star, Crown, Sparkles, Award } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,17 +27,16 @@ function ProductPage() {
   const { add } = useCart();
   const nav = useNavigate();
   const [qty, setQty] = useState(1);
-  const [active, setActive] = useState(0);
 
-  function addToCart(buyNow = false) {
+  function buyNow() {
     add({ id: product.id, name: product.name, price: product.price, image: product.images[0] }, qty);
-    toast.success("Added to cart");
-    if (buyNow) nav({ to: "/checkout" });
+    toast.success("Proceeding to checkout");
+    nav({ to: "/checkout" });
   }
 
   return (
     <div className="bg-background">
-      {/* HERO BANNER */}
+      {/* HERO */}
       <section className="relative overflow-hidden bg-primary text-primary-foreground">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(201,168,76,0.25),transparent_60%)]" />
         <div className="container relative mx-auto px-4 py-10 md:py-14 text-center">
@@ -46,20 +53,25 @@ function ProductPage() {
       {/* PRODUCT */}
       <section className="container mx-auto px-4 py-10 md:py-16">
         <div className="grid gap-10 lg:grid-cols-2">
-          {/* GALLERY */}
+          {/* GALLERY — AUTOPLAY SLIDER */}
           <div>
-            <div className="aspect-square overflow-hidden rounded-2xl bg-muted ring-1 ring-[var(--gold)]/30 shadow-2xl">
-              <img src={productImages[active]} alt={product.name}
-                className="h-full w-full object-cover transition-opacity duration-300" />
-            </div>
-            <div className="mt-4 grid grid-cols-6 gap-2">
-              {productImages.map((src, i) => (
-                <button key={i} onClick={() => setActive(i)}
-                  className={`aspect-square overflow-hidden rounded-md bg-muted ring-2 transition ${active === i ? "ring-[var(--gold)]" : "ring-transparent hover:ring-[var(--gold)]/40"}`}>
-                  <img src={src} alt="" className="h-full w-full object-cover" />
-                </button>
-              ))}
-            </div>
+            <Carousel
+              opts={{ loop: true }}
+              plugins={[Autoplay({ delay: 2800, stopOnInteraction: false })]}
+              className="overflow-hidden rounded-2xl ring-1 ring-[var(--gold)]/30 shadow-2xl"
+            >
+              <CarouselContent>
+                {productImages.map((src, i) => (
+                  <CarouselItem key={i}>
+                    <div className="aspect-square bg-muted">
+                      <img src={src} alt={`${product.name} ${i + 1}`} className="h-full w-full object-cover" />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-3" />
+              <CarouselNext className="right-3" />
+            </Carousel>
           </div>
 
           {/* DETAILS */}
@@ -102,16 +114,13 @@ function ProductPage() {
               <p className="text-xs text-muted-foreground">Cash on Delivery available</p>
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row gap-3">
-              <button onClick={() => addToCart(false)}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border-2 border-primary px-6 py-3.5 text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition">
-                <ShoppingBag className="h-4 w-4" /> Add to Cart
-              </button>
-              <button onClick={() => addToCart(true)}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-gradient-to-r from-[var(--gold)] to-amber-500 px-6 py-3.5 text-sm font-bold text-primary hover:opacity-90 transition shadow-lg">
-                <Sparkles className="h-4 w-4" /> Buy Now
-              </button>
-            </div>
+            {/* BIG BUY NOW BUTTON */}
+            <button
+              onClick={buyNow}
+              className="mt-5 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[var(--gold)] via-amber-400 to-amber-500 px-8 py-5 text-lg md:text-xl font-extrabold text-primary uppercase tracking-wider shadow-2xl hover:opacity-95 hover:scale-[1.02] transition-all ring-2 ring-[var(--gold)]/40"
+            >
+              <Sparkles className="h-6 w-6" /> Buy Now — {formatPrice(product.price)}
+            </button>
 
             <div className="mt-8 grid grid-cols-3 gap-3 border-t pt-6">
               <Feature icon={Truck} title="Free Delivery" desc="Pan-Pakistan" />
@@ -122,19 +131,28 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* BIG GALLERY */}
+      {/* BIG SLIDESHOW */}
       <section className="bg-muted/30 py-14">
         <div className="container mx-auto px-4">
           <h3 className="font-display text-2xl md:text-3xl font-bold text-center mb-2">Crafted in every detail</h3>
           <p className="text-center text-muted-foreground mb-8 text-sm">Indoor clarity. Sunlight tint. Pure luxury.</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {productImages.map((src, i) => (
-              <div key={i} className="aspect-square overflow-hidden rounded-xl bg-background ring-1 ring-[var(--gold)]/20 group">
-                <img src={src} alt="" loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              </div>
-            ))}
-          </div>
+          <Carousel
+            opts={{ loop: true, align: "start" }}
+            plugins={[Autoplay({ delay: 2200, stopOnInteraction: false })]}
+            className="mx-auto max-w-5xl"
+          >
+            <CarouselContent>
+              {productImages.map((src, i) => (
+                <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="aspect-square overflow-hidden rounded-xl bg-background ring-1 ring-[var(--gold)]/20">
+                    <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 
@@ -143,9 +161,9 @@ function ProductPage() {
         <Crown className="mx-auto h-10 w-10 text-[var(--gold)] mb-3" />
         <h3 className="font-display text-2xl md:text-3xl font-bold">Wear the Crown.</h3>
         <p className="mt-2 text-muted-foreground max-w-md mx-auto text-sm">Only PKR 1,650 — with free delivery anywhere in Pakistan. Cash on Delivery available.</p>
-        <button onClick={() => addToCart(true)}
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--gold)] to-amber-500 px-8 py-3.5 text-sm font-bold text-primary hover:opacity-90 shadow-lg">
-          <Sparkles className="h-4 w-4" /> Order Now — PKR 1,650
+        <button onClick={buyNow}
+          className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--gold)] to-amber-500 px-10 py-4 text-base font-bold text-primary hover:opacity-90 shadow-lg">
+          <Sparkles className="h-5 w-5" /> Order Now — PKR 1,650
         </button>
       </section>
     </div>
