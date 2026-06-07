@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
 import { formatPrice } from "@/data/products";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { toast } from "sonner";
@@ -28,6 +28,7 @@ function Checkout() {
   const { items, total, clear } = useCart();
   const nav = useNavigate();
   const [busy, setBusy] = useState(false);
+  const submittingRef = useRef(false);
   const shipping = 0;
   const grand = total + shipping;
 
@@ -37,6 +38,8 @@ function Checkout() {
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setBusy(true);
     const fd = new FormData(e.currentTarget);
     const payload = {
@@ -51,7 +54,11 @@ function Checkout() {
     };
     const { data, error } = await createOrder(payload);
     setBusy(false);
-    if (error || !data) { toast.error("Order failed. Please try again or WhatsApp us."); return; }
+    if (error || !data) {
+      submittingRef.current = false;
+      toast.error("Order failed. Please try again or WhatsApp us.");
+      return;
+    }
 
     // Send email notification to owner via FormSubmit (no signup; first submit requires owner email confirmation)
     try {
@@ -77,6 +84,7 @@ function Checkout() {
     }
 
     clear();
+    submittingRef.current = false;
     toast.success(`Order placed! Tracking ID: ${data.tracking_id}`);
     nav({ to: "/track", search: { id: data.tracking_id } });
   }
