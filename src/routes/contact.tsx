@@ -23,8 +23,8 @@ function Contact() {
           {[
             { icon: Mail, l: "Email", v: "Kingeyewearfashion@gmail.com" },
             { icon: Phone, l: "Phone / WhatsApp", v: "03051544177" },
-            { icon: MapPin, l: "Flagship Store", v: "Shop 203, D-Ground, Faisalabad, Punjab, Pakistan" },
-            { icon: Clock, l: "Hours", v: "Mon–Sat · 10:00 AM – 9:00 PM" },
+            { icon: MapPin, l: "Flagship Store", v: "Faisalabad Clock Tower Basement Kachari Bazar" },
+            { icon: Clock, l: "Hours", v: "24/7 Open" },
           ].map(({ icon: Icon, l, v }) => (
             <div key={l} className="flex gap-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--gold)]/20 text-[var(--gold)]">
