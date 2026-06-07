@@ -75,7 +75,7 @@ function Checkout() {
           <h2 className="font-semibold">Shipping Details</h2>
           {[
             { n: "name", l: "Full name" },
-            { n: "email", l: "Email", type: "email" },
+            { n: "email", l: "Email (Optional)", type: "email", optional: true },
             { n: "phone", l: "Phone", type: "tel" },
             { n: "address", l: "Address" },
             { n: "city", l: "City" },
@@ -83,7 +83,7 @@ function Checkout() {
           ].map((f) => (
             <div key={f.n}>
               <label className="text-sm font-medium">{f.l}</label>
-              <input name={f.n} type={f.type || "text"} required
+              <input name={f.n} type={f.type || "text"} required={!f.optional}
                 className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm" />
             </div>
           ))}
