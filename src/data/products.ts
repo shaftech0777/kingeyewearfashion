@@ -56,4 +56,4 @@ export const categories = [
 
 export const getProduct = (id: string) => products.find((p) => p.id === id);
 export const getByCategory = (cat: string) => products.filter((p) => p.category === cat);
-export const formatPrice = (n: number) => `₹${n.toLocaleString("en-IN")}`;
+export const formatPrice = (n: number) => `PKR ${n.toLocaleString("en-PK")}`;

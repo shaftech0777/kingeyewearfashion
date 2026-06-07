@@ -63,7 +63,7 @@ function Checkout() {
                 className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm" />
             </div>
           ))}
-          <p className="text-xs text-muted-foreground">Payment: Cash on Delivery (demo). You'll receive a tracking ID after placing the order.</p>
+          <p className="text-xs text-muted-foreground">Payment: Cash on Delivery (demo). You'll receive a tracking ID after placing the order. Order confirmation will be sent to Kingeyewearfashion@gmail.com.</p>
         </div>
         <div className="h-fit rounded-lg border p-6 space-y-3">
           <h2 className="font-display text-xl font-bold">Summary</h2>

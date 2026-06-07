@@ -23,7 +23,7 @@ export function SiteHeader() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2">
           <Crown className="h-6 w-6 text-[var(--gold)]" />
-          <span className="font-display text-xl font-bold tracking-tight">King Eyewear</span>
+          <span className="font-display text-xl font-bold tracking-tight">King Eyewear Fashion</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-6 text-sm">

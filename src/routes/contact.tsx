@@ -21,9 +21,9 @@ function Contact() {
       <div className="grid gap-10 md:grid-cols-2">
         <div className="space-y-5">
           {[
-            { icon: Mail, l: "Email", v: "care@kingeyewear.in" },
-            { icon: Phone, l: "Phone / WhatsApp", v: "+91 98765 43210" },
-            { icon: MapPin, l: "Flagship Store", v: "203 Linking Road, Bandra West, Mumbai 400050, India" },
+            { icon: Mail, l: "Email", v: "Kingeyewearfashion@gmail.com" },
+            { icon: Phone, l: "Phone / WhatsApp", v: "03051544177" },
+            { icon: MapPin, l: "Flagship Store", v: "Shop 203, D-Ground, Faisalabad, Punjab, Pakistan" },
             { icon: Clock, l: "Hours", v: "Mon–Sat · 10:00 AM – 9:00 PM" },
           ].map(({ icon: Icon, l, v }) => (
             <div key={l} className="flex gap-4">

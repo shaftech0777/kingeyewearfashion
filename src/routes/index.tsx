@@ -48,7 +48,7 @@ function Home() {
       <section className="border-b">
         <div className="container mx-auto grid grid-cols-1 gap-6 px-4 py-8 md:grid-cols-3">
           {[
-            { icon: Truck, t: "Free Delivery", d: "On orders above ₹2,000 across India" },
+            { icon: Truck, t: "Free Delivery", d: "On orders above PKR 2,000 across Pakistan" },
             { icon: ShieldCheck, t: "1-Year Warranty", d: "On all frames & sunglasses" },
             { icon: RotateCcw, t: "7-Day Returns", d: "Hassle-free, no questions asked" },
           ].map(({ icon: Icon, t, d }) => (
