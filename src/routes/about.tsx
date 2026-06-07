@@ -17,7 +17,7 @@ function About() {
       <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)] mb-3">Our Story</p>
       <h1 className="font-display text-4xl md:text-5xl font-bold mb-6">About King Eyewear Fashion</h1>
       <p className="text-lg text-muted-foreground leading-relaxed">
-        Founded in 2015 by <strong className="text-foreground">Mr. Rajveer Singh</strong> in the heart of Faisalabad, Punjab, Pakistan,
+        Founded by <strong className="text-foreground">Mr. Mahad Ali</strong> in the heart of Faisalabad, Punjab, Pakistan,
         King Eyewear Fashion was born from a simple belief — that every person deserves to feel like royalty when they put on their glasses.
       </p>
       <p className="mt-4 text-muted-foreground leading-relaxed">
