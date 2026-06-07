@@ -14,7 +14,7 @@ function Checkout() {
   const { items, total, clear } = useCart();
   const nav = useNavigate();
   const [busy, setBusy] = useState(false);
-  const shipping = total >= 2000 ? 0 : 99;
+  const shipping = 0;
   const grand = total + shipping;
 
   if (items.length === 0) {
