@@ -36,27 +36,25 @@ OWNER & CONTACT:
 Keep responses concise, friendly, and helpful. Only answer about this product, delivery, tracking, orders, and brand info. If you don't know something, suggest they contact Kingeyewearfashion@gmail.com or WhatsApp 03051544177.`;
 
 export const askKingBot = createServerFn({ method: "POST" })
-  .inputValidator((d: { messages: Msg[] }) => d)
+  .validator((d: { messages: Msg[] }) => d)
   .handler(async ({ data }) => {
-    const apiKey = process.env.LOVABLE_API_KEY;
-    if (!apiKey) throw new Error("Missing LOVABLE_API_KEY");
+    const last = data.messages.at(-1)?.content.toLowerCase() ?? "";
 
-    const resp = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Lovable-API-Key": apiKey,
-      },
-      body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [{ role: "system", content: SYSTEM }, ...data.messages],
-      }),
-    });
-
-    if (!resp.ok) {
-      const t = await resp.text();
-      throw new Error(`AI gateway: ${resp.status} ${t}`);
+    if (last.includes("deliver") || last.includes("time") || last.includes("days")) {
+      return { text: "Your King Cartier Rimless Eyewear order is delivered across Pakistan in 3–5 working days. Delivery is free, so total is PKR 1,650." };
     }
-    const j = await resp.json();
-    return { text: j.choices?.[0]?.message?.content ?? "Sorry, no response." };
+
+    if (last.includes("track") || last.includes("tracking") || last.includes("ke-")) {
+      return { text: "After placing an order, you’ll get a tracking ID starting with KE-. Use it on the Track Order page to check status: Order Placed, Processing, Shipped, Out for Delivery, or Delivered." };
+    }
+
+    if (last.includes("open") || last.includes("check") || last.includes("pay") || last.includes("payment") || last.includes("cod")) {
+      return { text: "Yes, Cash on Delivery is available. You can open and check the parcel first; if you like the product, then you can pay." };
+    }
+
+    if (last.includes("contact") || last.includes("whatsapp") || last.includes("phone") || last.includes("location")) {
+      return { text: "You can contact King Eyewear Fashion on WhatsApp/Phone: 03051544177 or email Kingeyewearfashion@gmail.com. Store location: Faisalabad Clock Tower Basement Kachari Bazar. Open 24/7." };
+    }
+
+    return { text: `${SYSTEM}\n\nShort answer: King Cartier Rimless Gold & Wood Eyewear, also called Cheeta Magic Glasses, is PKR 1,650 with free delivery, COD, allow-to-open checking, and 3–5 working days delivery across Pakistan.` };
   });
