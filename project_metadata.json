@@ -1,0 +1,20 @@
+{
+  "id": "4073cb28-e546-4011-b398-e61769678b5b",
+  "name": "Vyffi",
+  "description": "Local standalone developer environment workspace.",
+  "is_active": false,
+  "is_archived": true,
+  "is_favorited": false,
+  "framework": "react",
+  "language": "typescript",
+  "last_opened": "2026-07-07T18:50:48.189Z",
+  "project_icon": "💻",
+  "color": "teal",
+  "tags": [],
+  "status": "active",
+  "created_at": "2026-07-07T18:50:25.092Z",
+  "updated_at": "2026-07-07T19:14:24.896Z",
+  "git_repo": "shaftech0777/Kingeyewearfashion",
+  "git_branch": "main",
+  "git_last_sync": "2026-07-07T19:14:24.896Z"
+}
